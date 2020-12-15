@@ -18,7 +18,7 @@ set -ex
 # time out, give up. If we succeed, stash that code in a docker image which
 # later tests can use to get it back.
 
-cd /home/travis/gopath/src/github.com/pachyderm/pachyderm
+cd /home/travis/gopath/src/github.com/Annu-Upadhyay/pachyderm
 
 if [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then
     # These shenannigans not needed for release and branch builds, hopefully.
