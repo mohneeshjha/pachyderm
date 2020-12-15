@@ -1,5 +1,10 @@
-dist: xenial
+dist: focal
 sudo: required
+group: edge
+virt: vm
+arch: 
+    - amd64
+    - arm64-graviton2
 cache:
   directories:
     # If any directories are added here, they must also be added to
@@ -47,6 +52,13 @@ stages:
 jobs:
   include:
     - stage: build
+      script: etc/testing/travis_build_check_and_stash.sh && etc/testing/travis_build.sh
+    - dist: focal
+      arch: arm64-graviton2
+      sudo: required
+      group: edge
+      virt: vm
+      stage: build
       script: etc/testing/travis_build_check_and_stash.sh && etc/testing/travis_build.sh
 
 before_install:
