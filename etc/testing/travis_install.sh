@@ -50,9 +50,9 @@ pip3 install --upgrade --user awscli
 if [ ! -f ~/cached-deps/kubectl ] ; then
     KUBECTL_VERSION=v1.19.2
     if [ `uname -m` = 'aarch64' ]; then
-      curl -L -o kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl ;
-    else
       curl -L -o kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/arm64/kubectl ;
+    else
+      curl -L -o kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl ;
     fi
     chmod +x ./kubectl && \
     mv ./kubectl ~/cached-deps/kubectl
@@ -91,11 +91,11 @@ fi
 if [ ! -f ~/cached-deps/etcdctl ] ; then
     if [ `uname -m` = 'aarch64' ]; then
       ETCD_VERSION=v3.3.12;
-      curl -L https://storage.googleapis.com/etcd/${ETCD_VERSION}/etcd-${ETCD_VERSION}-linux-amd64.tar.gz \
+      curl -L https://storage.googleapis.com/etcd/${ETCD_VERSION}/etcd-${ETCD_VERSION}-linux-arm64.tar.gz \
       | tar xzf - --strip-components=1;
     else
       ETCD_VERSION=v3.1.14;
-      curl -L https://storage.googleapis.com/etcd/${ETCD_VERSION}/etcd-${ETCD_VERSION}-linux-arm64.tar.gz \
+      curl -L https://storage.googleapis.com/etcd/${ETCD_VERSION}/etcd-${ETCD_VERSION}-linux-amd64.tar.gz \
       | tar xzf - --strip-components=1 ;
     fi
         mv ./etcdctl ~/cached-deps/etcdctl
