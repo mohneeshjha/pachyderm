@@ -1,4 +1,4 @@
-dist: xenail
+dist: bionic
 sudo: required
 group: edge
 virt: lxd
