@@ -34,11 +34,11 @@ sudo apt-get install -y -qq \
   fuse
 
 # Install fuse
-#ls /lib/modules/
-#sudo modprobe fuse
-#sudo chmod 666 /dev/fuse
-#sudo cp etc/build/fuse.conf /etc/fuse.conf
-#sudo chown root:root /etc/fuse.conf
+ls /lib/modules/
+sudo modprobe fuse
+sudo chmod 666 /dev/fuse
+sudo cp etc/build/fuse.conf /etc/fuse.conf
+sudo chown root:root /etc/fuse.conf
 
 # Install aws CLI (for TLS test)
 pip3 install --upgrade --user wheel
