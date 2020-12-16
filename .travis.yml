@@ -1,7 +1,7 @@
-dist: bionic
+dist: focal
 sudo: required
 group: edge
-virt: lxd
+virt: vm
 arch: 
     - amd64
     - arm64-graviton2
