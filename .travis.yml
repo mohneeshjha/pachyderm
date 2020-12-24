@@ -1,7 +1,7 @@
-dist: xenail
+dist: focal
 sudo: required
 group: edge
-virt: lxd
+virt: vm
 arch: 
     - amd64
     - arm64-graviton2
@@ -76,7 +76,7 @@ install:
 # NB: Have to switch directories because travis_test_check_and_pull.sh moves the build dir out under our feet
 script: 
 - go env
-- etc/testing/travis_test_check_and_pull.sh && cd /home/travis/gopath/src/github.com/mohneeshjha997/pachyderm && travis_retry bash -c 'timeout 20m etc/testing/travis.sh; status=$?; if [ "$status" -ne 0 ]; then etc/testing/kube_debug.sh; fi; exit $status'
+- etc/testing/travis_test_check_and_pull.sh && cd /home/travis/gopath/src/github.com/mohneeshjha/pachyderm && travis_retry bash -c 'timeout 20m etc/testing/travis.sh; status=$?; if [ "$status" -ne 0 ]; then etc/testing/kube_debug.sh; fi; exit $status'
 
 before_cache:
   # Make sure cache dirs have the necessary permissions for Travis to traverse
