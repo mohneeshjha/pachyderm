@@ -32,6 +32,7 @@ require (
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/fsouza/go-dockerclient v1.4.1
 	github.com/gernest/wow v0.1.0 // indirect
+	github.com/go-bindata/go-bindata v3.1.2+incompatible // indirect
 	github.com/go-ini/ini v1.42.0 // indirect
 	github.com/go-test/deep v1.0.1 // indirect
 	github.com/gofrs/uuid v3.3.0+incompatible // indirect
@@ -73,6 +74,7 @@ require (
 	github.com/prometheus/client_golang v1.5.0
 	github.com/prometheus/client_model v0.2.0
 	github.com/prometheus/common v0.9.1
+	github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0 // indirect
 	github.com/robfig/cron v1.2.0
 	github.com/russellhaering/goxmldsig v0.0.0-20180430223755-7acd5e4a6ef7 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect

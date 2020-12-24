@@ -2,20 +2,20 @@
 
 set -ex
 
-(
-    # Stop Travis from timing us out in 10m when we want to get retried after 20m
-    set +x
-    while true; do
-        echo "liveness ping $(date)"
-        sleep 60
-    done
-) &
+#(
+ #   # Stop Travis from timing us out in 10m when we want to get retried after 20m
+  #  set +x
+   # while true; do
+    #    echo "liveness ping $(date)"
+     #   sleep 60
+#    done
+#) &
 
 # Repeatedly restart minikube until it comes up. This corrects for an issue in
 # Travis, where minikube will get stuck on startup and never recover
 while true; do
   # In case minikube delete doesn't work (see minikube#2519)
-  for C in $(docker ps -aq); do docker rm -f "$C"; done || true
+#  for C in $(docker ps -aq); do docker rm -f "$C"; done || true
 
   # Belt and braces
   sudo rm -rf \
@@ -39,12 +39,14 @@ if [[ "$TRAVIS_SECURE_ENV_VARS" == "true" ]]; then
     # Pull the pre-built images. This is only done if we have access to the
     # secret env vars, because otherwise the build step would've had to be
     # skipped.
+    go get  github.com/remyoudompheng/bigfft
     make install
+    export PATH=$PATH:$GOPATH/bin
     version=$(pachctl version --client-only)
-    docker pull "pachyderm/pachd:${version}"
-    docker tag "pachyderm/pachd:${version}" "pachyderm/pachd:local"
-    docker pull "pachyderm/worker:${version}"
-    docker tag "pachyderm/worker:${version}" "pachyderm/worker:local"
+    #docker pull "pachyderm/pachd:${version}"
+    #docker tag "pachyderm/pachd:${version}" "pachyderm/pachd:local"
+    #docker pull "pachyderm/worker:${version}"
+    #docker tag "pachyderm/worker:${version}" "pachyderm/worker:local"
 else
     make docker-build
     # push pipeline build images
@@ -55,12 +57,14 @@ fi
 
 make launch-loki
 
-for i in $(seq 3); do
+#for i in $(seq 3); do
+ #   echo "123456789876543212345678987654321"
     make clean-launch-dev || true # may be nothing to delete
-    make launch-dev && break
-    (( i < 3 )) # false if this is the last loop (causes exit)
-    sleep 10
-done
+  #  echo "23456765432+++++++++++++++++++++++++++++++==========================================="
+   # make launch-dev && break
+    #(( i < 3 )) # false if this is the last loop (causes exit)
+#    sleep 10
+#done
 
 pachctl config update context "$(pachctl config get active-context)" --pachd-address="$(minikube ip):30650"
 

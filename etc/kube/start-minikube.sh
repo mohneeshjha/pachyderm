@@ -6,7 +6,8 @@ set -Eex
 VERSION=v1.13.0
 minikube_args=(
   "--vm-driver=none"
-  "--kubernetes-version=${VERSION}"
+  "--kubernetes-version=v1.18.4"
+  "--extra-config=kubelet.cgroup-driver=systemd"
 )
 while getopts ":v" opt; do
   case "${opt}" in
@@ -20,21 +21,21 @@ while getopts ":v" opt; do
   esac
 done
 
-if [[ -n "${TRAVIS}" ]]; then
+#if [[ -n "${TRAVIS}" ]]; then
   minikube_args+=("--bootstrapper=kubeadm")
-fi
+#fi
 
 
 # Note that we update the 'PATH' to include '~/cached-deps' in '.travis.yml',
 # but this doesn't update the PATH for calls using 'sudo'. To make a 'sudo' run
 # a binary in '~/cached-deps', you need to explicitly set the path like so:
 #     sudo env "PATH=$PATH" minikube foo
-sudo env "PATH=$PATH" "CHANGE_MINIKUBE_NONE_USER=true" \
+sudo  env "PATH=$PATH" "CHANGE_MINIKUBE_NONE_USER=true" \
   minikube start "${minikube_args[@]}"
 
 # Try to connect for three minutes
 for _ in $(seq 36); do
-  if kubectl version &>/dev/null; then
+  if sudo kubectl version &>/dev/null; then
     exit 0
   fi
   sleep 5

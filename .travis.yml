@@ -31,19 +31,19 @@ env:
     - BUCKET=MISC
     # If you want to update the number of PPS or auth buckets, you'll neet to
     # update the value of PPS_BUCKETS or AUTH_BUCKETS above
-    - BUCKET=ADMIN
-    - BUCKET=AUTH1
-    - BUCKET=AUTH2
-    - BUCKET=PFS
-    - BUCKET=PPS1
-    - BUCKET=PPS2
-    - BUCKET=PPS3
+    # - BUCKET=ADMIN
+    #- BUCKET=AUTH1
+    #- BUCKET=AUTH2
+    #- BUCKET=PFS
+    #- BUCKET=PPS1
+    #- BUCKET=PPS2
+    #- BUCKET=PPS3
     
-    - BUCKET=PPS4
-    - BUCKET=PPS5
-    - BUCKET=PPS6
-    - BUCKET=EXAMPLES
-    - BUCKET=OBJECT
+      # - BUCKET=PPS4
+      #- BUCKET=PPS5
+      #- BUCKET=PPS6
+      # - BUCKET=EXAMPLES
+      # - BUCKET=OBJECT
 
 stages:
   - build
@@ -74,7 +74,9 @@ install:
   - etc/testing/travis_install.sh
 
 # NB: Have to switch directories because travis_test_check_and_pull.sh moves the build dir out under our feet
-script: etc/testing/travis_test_check_and_pull.sh && cd /home/travis/gopath/src/github.com/mohneeshjha997/pachyderm && travis_retry bash -c 'timeout 20m etc/testing/travis.sh; status=$?; if [ "$status" -ne 0 ]; then etc/testing/kube_debug.sh; fi; exit $status'
+script: 
+- go env
+- etc/testing/travis_test_check_and_pull.sh && cd /home/travis/gopath/src/github.com/mohneeshjha997/pachyderm && travis_retry bash -c 'timeout 20m etc/testing/travis.sh; status=$?; if [ "$status" -ne 0 ]; then etc/testing/kube_debug.sh; fi; exit $status'
 
 before_cache:
   # Make sure cache dirs have the necessary permissions for Travis to traverse
@@ -87,6 +89,7 @@ branches:
   only:
   # Trigger only for PR's to master
   - master
+  - arm
   # Trigger CI tests for all release branches
   # Eg. 1.9.x, 1.10.x
   - /^\d+\.\d+\.x/

@@ -4,11 +4,11 @@ set -ex
 
 # install latest version of docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-if [ `uname -m` = 'aarch64' ]; then
-  sudo add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable";
-else
-  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable";
-fi
+#if [ `uname -m` = 'aarch64' ]; then
+#  sudo add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable";
+#else
+ # sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable";
+#fi
 sudo apt-get update -y
 sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
@@ -63,7 +63,7 @@ fi
 # curl https://api.github.com/repos/kubernetes/minikube/releases | jq -r .[].tag_name | sort -V | tail -n1
 if [ ! -f ~/cached-deps/minikube ] ; then
     if [ `uname -m` = 'aarch64' ]; then
-      MINIKUBE_VERSION=v1.13.1;
+      MINIKUBE_VERSION=v1.16.0;
       curl -L -o minikube https://storage.googleapis.com/minikube/releases/${MINIKUBE_VERSION}/minikube-linux-arm64;
     else
       MINIKUBE_VERSION=v1.13.1;
@@ -94,7 +94,7 @@ if [ ! -f ~/cached-deps/etcdctl ] ; then
       curl -L https://storage.googleapis.com/etcd/${ETCD_VERSION}/etcd-${ETCD_VERSION}-linux-arm64.tar.gz \
       | tar xzf - --strip-components=1;
     else
-      ETCD_VERSION=v3.1.14;
+      ETCD_VERSION=v3.3.12;
       curl -L https://storage.googleapis.com/etcd/${ETCD_VERSION}/etcd-${ETCD_VERSION}-linux-amd64.tar.gz \
       | tar xzf - --strip-components=1 ;
     fi
