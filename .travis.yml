@@ -69,6 +69,7 @@ before_install:
   - cat /proc/cpuinfo
   # Make sure cache dirs exist and are writable
   - etc/testing/travis_cache.sh
+  - sudo apt-get install -y conntrack
 
 install:
   - etc/testing/travis_install.sh
