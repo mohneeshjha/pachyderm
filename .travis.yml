@@ -1,7 +1,7 @@
-dist: focal
+dist: xenail
 sudo: required
 group: edge
-virt: vm
+virt: lxd
 arch: 
     - amd64
     - arm64-graviton2
@@ -49,17 +49,17 @@ stages:
   - build
   - test
 
-jobs:
-  include:
-    - stage: build
-      script: etc/testing/travis_build_check_and_stash.sh && etc/testing/travis_build.sh
-    - dist: focal
-      arch: arm64-graviton2
-      sudo: required
-      group: edge
-      virt: vm
-      stage: build
-      script: etc/testing/travis_build_check_and_stash.sh && etc/testing/travis_build.sh
+#jobs:
+ # include:
+  #  - stage: build
+   #   script: etc/testing/travis_build_check_and_stash.sh && etc/testing/travis_build.sh#
+#    - dist: focal
+ #     arch: arm64-graviton2
+  #    sudo: required
+   #   group: edge
+    #  virt: vm
+     # stage: build
+     # script: etc/testing/travis_build_check_and_stash.sh && etc/testing/travis_build.sh
 
 before_install:
   # Get some insight into the system
